@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.wsc
+*.ws
+*.srm
+*.sav
+*.st
+*.state
+*_码表.xlsx
+_*tmp*.xlsx
+assets/fonts/simsun.ttc
+~$*
