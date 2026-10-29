@@ -20,7 +20,7 @@ TEMPLATE = r'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>超级机器人大战COMPACT3 汉化补丁 V1</title>
+<title>超级机器人大战COMPACT3 汉化补丁 V2</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--bg:#0a0a1a;--card:rgba(18,18,40,.96);--bd:rgba(255,255,255,.07);--ac:#e63946;--ac2:#ffd166;--gn:#06d6a0;--tx:#e8e8f0;--dm:#7a7a9a;--bl:#4facfe}
@@ -48,6 +48,11 @@ h1{font-size:17px;font-weight:700;line-height:1.3}
 .patchinfo .pih{color:var(--ac2);font-weight:700;margin-bottom:4px;font-size:12px}
 .patchinfo .pir{display:flex;justify-content:space-between;gap:12px;color:var(--dm)}
 .patchinfo .pir b{color:var(--tx);font-weight:600;text-align:right;word-break:break-all}
+.fontsel{display:none;margin-top:12px;border:1px solid var(--bd);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.02)}
+.fontsel .fsl{font-size:12px;color:var(--dm);margin-right:8px}
+.fontsel label{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:12px;cursor:pointer}
+.fontsel label i{font-style:normal;font-size:10px;color:var(--dm)}
+.fontsel input{accent-color:var(--ac)}
 .bar{height:6px;border-radius:6px;background:rgba(255,255,255,.06);overflow:hidden;margin:18px 0 14px}
 .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .25s}
 button,#dl{display:block;width:100%;border:none;border-radius:12px;padding:13px 16px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:.2s}
@@ -92,7 +97,7 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
         <div class="li">SRW</div>
         <div>
           <h1>超级机器人大战COMPACT3</h1>
-          <div class="sub">汉化补丁 V1 · WonderSwan Color</div>
+          <div class="sub">汉化补丁 V2 · WonderSwan Color</div>
         </div>
       </div>
     </div>
@@ -113,13 +118,21 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
     </div>
 
     <div class="patchinfo" id="pi">
-      <div class="pih">补丁信息 · V1</div>
+      <div class="pih">补丁信息 · V2</div>
       <div class="pir"><span>破解 / 文本初翻译</span><b>deepseek v4.1flash</b></div>
       <div class="pir"><span>文本第一轮校准</span><b>glm5.3</b></div>
       <div class="pir"><span>文本第二轮校准</span><b>gemini + glm5.3flash 翻译，deepseek 4.1flash 筛选</b></div>
       <div class="pir"><span>流程测试</span><b>Lily</b></div>
       <div class="pir"><span>干杂活</span><b>lcdyk</b></div>
+      <div class="pir"><span>V2 修复</span><b>分支选项、梵·法内尔爱称、妮→尼；演示改动画；字体偏小</b></div>
+      <div class="pir"><span>字体版本</span><b><span id="fname">宋体</span></b></div>
       <div class="pir"><span>CRC32</span><b><span id="pcrc">-</span> → <span id="ocrc">-</span></b></div>
+    </div>
+
+    <div class="fontsel" id="fs">
+      <span class="fsl">字体</span>
+      <label><input type="radio" name="font" value="simsun" checked><b>宋体</b><i>笔画扎实（推荐）</i></label>
+      <label><input type="radio" name="font" value="fusion"><b>融合像素</b><i>点阵风格</i></label>
     </div>
 
     <div class="bar"><i id="pb"></i></div>
@@ -128,28 +141,38 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
     <div id="lg"></div>
 
     <div class="note">所有处理都在浏览器本地完成，不上传 ROM。请使用自己拥有的正版原版 ROM；补丁只适用于页面上显示的原版 CRC。</div>
-    <div class="ft">V1 · XOR + Deflate · CRC32 · GPLv3</div>
+    <div class="ft">V2 · XOR + Deflate · CRC32 · GPLv3</div>
   </div>
 </div>
 
 <script>
-const PATCH_B64="__PATCH_B64__";
+const PATCH_DATA={simsun:"__PATCH_SIMSUN_B64__",fusion:"__PATCH_FUSION_B64__"};
+const FONT_NAME={simsun:"宋体",fusion:"融合像素"};
+const OUT_NAMES={simsun:"超级机器人大战compact3[cn][lcdyk][v2].wsc",fusion:"超级机器人大战compact3[cn][lcdyk][v2][fusion].wsc"};
 const $=id=>document.getElementById(id);
 const CT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}return t})();
 function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=(CT[(c^u8[i])&255]^(c>>>8))>>>0;return (c^0xFFFFFFFF)>>>0}
 function hex8(n){return n.toString(16).toUpperCase().padStart(8,"0")}
 function log(msg,cls){const d=document.createElement("div");if(cls)d.className=cls;d.textContent=msg;$("lg").appendChild(d);$("lg").scrollTop=$("lg").scrollHeight}
 function stage(p,msg){$("pb").style.width=p+"%";if(msg)$("vd").textContent=msg}
-let SRC=null,OUT=null,META=null;
-const OUT_NAME="超级机器人大战compact3[cn][lcdyk][v1].wsc";
-function parsePatch(){
-  const bin=atob(PATCH_B64),by=new Uint8Array(bin.length);
+let SRC=null,OUT=null,META=null,PATCHES={},SEL="simsun";
+function parsePatch(b64){
+  const bin=atob(b64),by=new Uint8Array(bin.length);
   for(let i=0;i<bin.length;i++)by[i]=bin.charCodeAt(i);
   if(String.fromCharCode(by[0],by[1],by[2],by[3])!=="XDF1")throw new Error("补丁格式错误");
   const dv=new DataView(by.buffer);
   return {srcCrc:dv.getUint32(4,true),outCrc:dv.getUint32(8,true),size:dv.getUint32(12,true),comp:by.slice(20,20+dv.getUint32(16,true))};
 }
-try{META=parsePatch();$("vexp").textContent=hex8(META.srcCrc);$("pcrc").textContent=hex8(META.srcCrc);$("ocrc").textContent=hex8(META.outCrc)}catch(e){$("vexp").textContent="补丁解析失败";$("vexp").className="v er"}
+for(const k in PATCH_DATA){if(!PATCH_DATA[k])continue;try{PATCHES[k]=parsePatch(PATCH_DATA[k])}catch(e){}}
+function selectFont(k){
+  if(!PATCHES[k])k="simsun";
+  SEL=k;META=PATCHES[k];OUT=null;$("dl").style.display="none";
+  $("fname").textContent=FONT_NAME[k]||k;
+  if(META){$("vexp").textContent=hex8(META.srcCrc);$("pcrc").textContent=hex8(META.srcCrc);$("ocrc").textContent=hex8(META.outCrc)}
+  if(SRC&&META){const c=crc32(SRC);$("ap").disabled=!(c===META.srcCrc&&SRC.length===META.size)}
+}
+if(PATCHES.simsun){selectFont("simsun");$("fs").style.display=Object.keys(PATCHES).length>1?"block":"none";}
+else{$("vexp").textContent="补丁解析失败";$("vexp").className="v er"}
 async function inflate(d){
   if(typeof DecompressionStream==="undefined")throw new Error("浏览器不支持 DecompressionStream（请用新版 Chrome/Edge/Firefox）");
   const ds=new DecompressionStream("deflate-raw"),w=ds.writable.getWriter();w.write(d);w.close();
@@ -193,12 +216,16 @@ $("ap").addEventListener("click",async()=>{
     stage(100,"补丁应用成功");log("补丁应用成功","ok");$("dl").style.display="block";
   }catch(e){stage(0,"失败");log("失败："+e.message,"er");$("ap").disabled=false}
 });
+document.querySelectorAll("input[name=font]").forEach(el=>el.addEventListener("change",e=>{
+  selectFont(e.target.value);
+  if(SRC)log("已切换字体："+(FONT_NAME[SEL]||SEL),"ii");
+}));
 $("agree").addEventListener("change",e=>{$("enter").disabled=!e.target.checked});
 $("enter").addEventListener("click",()=>{$("notice").classList.add("hide")});
 $("dl").addEventListener("click",()=>{
   if(!OUT)return;
   const a=document.createElement("a");a.href=URL.createObjectURL(OUT);
-  a.download=OUT_NAME;
+  a.download=OUT_NAMES[SEL]||OUT_NAMES.simsun;
   a.click();URL.revokeObjectURL(a.href);log("已开始下载","ok");
 });
 </script>
@@ -206,30 +233,40 @@ $("dl").addEventListener("click",()=>{
 </html>'''
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Generate a self-contained WSC patch page.")
-    ap.add_argument("-i", "--input", required=True, help="原版日文 ROM")
-    ap.add_argument("-o", "--patched", required=True, help="已汉化 ROM")
-    ap.add_argument("--out", help="输出 HTML（默认 index.html）")
-    args = ap.parse_args()
-    src = Path(args.input).read_bytes()
-    patched = Path(args.patched).read_bytes()
+def pack(src: bytes, patched: bytes, src_crc: int) -> tuple[str, int, int]:
     if len(src) != len(patched):
         raise SystemExit(f"ROM 大小不一致: {len(src)} != {len(patched)}")
-    src_crc = zlib.crc32(src) & 0xFFFFFFFF
     out_crc = zlib.crc32(patched) & 0xFFFFFFFF
     key = bytes(a ^ b for a, b in zip(src, patched))
     co = zlib.compressobj(9, zlib.DEFLATED, -15)
     comp = co.compress(key) + co.flush()
     assert zlib.decompress(comp, -15) == key
     blob = b"XDF1" + struct.pack("<IIII", src_crc, out_crc, len(patched), len(comp)) + comp
-    b64 = base64.b64encode(blob).decode("ascii")
+    return base64.b64encode(blob).decode("ascii"), out_crc, len(blob)
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Generate a self-contained WSC patch page.")
+    ap.add_argument("-i", "--input", required=True, help="原版日文 ROM")
+    ap.add_argument("-o", "--patched", required=True, help="宋体汉化 ROM（默认字体）")
+    ap.add_argument("--fusion", help="融合像素汉化 ROM（提供后页面出现字体选择）")
+    ap.add_argument("--out", help="输出 HTML（默认 index.html）")
+    args = ap.parse_args()
+    src = Path(args.input).read_bytes()
+    src_crc = zlib.crc32(src) & 0xFFFFFFFF
+    b64_s, crc_s, len_s = pack(src, Path(args.patched).read_bytes(), src_crc)
+    b64_f, crc_f, len_f = "", 0, 0
+    if args.fusion:
+        b64_f, crc_f, len_f = pack(src, Path(args.fusion).read_bytes(), src_crc)
     out = Path(args.out) if args.out else Path(__file__).with_name("index.html")
-    out.write_text(TEMPLATE.replace("__PATCH_B64__", b64), encoding="utf-8")
+    html = (TEMPLATE.replace("__PATCH_SIMSUN_B64__", b64_s)
+                    .replace("__PATCH_FUSION_B64__", b64_f))
+    out.write_text(html, encoding="utf-8")
     print(f"source CRC32: {src_crc:08X}")
-    print(f"output CRC32: {out_crc:08X}")
-    print(f"patch: {len(blob)} B (compressed {len(comp)} B)")
-    print(f"written: {out}")
+    print(f"simsun output CRC32: {crc_s:08X}  patch {len_s} B")
+    if b64_f:
+        print(f"fusion output CRC32: {crc_f:08X}  patch {len_f} B")
+    print(f"written: {out}  ({len(html)} chars)")
 
 
 if __name__ == "__main__":

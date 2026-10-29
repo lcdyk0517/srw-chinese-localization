@@ -86,7 +86,11 @@ assets/
   text.xlsx                  剧情 / 名称 / UI / 术语 / F1 宏等工作表
   verified_kanji.jsonl       日文码表核对数据
   fonts/                     正文、单字节、F1 宏使用的字体
+  img/                       标题文字层/背景 PNG（-cn 优先，-jp 为原图；含单元表）
 build.py                     构建脚本
+titleimg.py                  标题文字图块：PNG → 压缩块 → 写回 ROM
+finalcard.py                 最终话标题卡：PNG → 两块 LZSS → 写回 ROM
+stagecard.py                 第二话标题卡第二行：PNG → 0x730A02 块
 make_patch_web.py            生成自带补丁的 index.html
 index.html                   网页打补丁页面
 sync_names.py                按名称表同步剧情说话人（可选工具）

@@ -26,6 +26,7 @@ import struct
 import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
+from titleimg import apply_title_graphics
 BASE = Path(__file__).resolve().parent
 ASSETS = BASE / "assets"
 INPUT = ASSETS
@@ -139,6 +140,42 @@ GLYPH_SLOTS_PER_PAGE = 253
 NEW_GLYPH_SLOTS = (NEW_GLYPH_COUNT // GLYPH_PAGE) * GLYPH_SLOTS_PER_PAGE
 def glyph_index(order: int) -> int:
     return (order // GLYPH_SLOTS_PER_PAGE) * GLYPH_PAGE + order % GLYPH_SLOTS_PER_PAGE
+
+# 主角全称/爱称/机体名在 v1 ROM 里的实际码位（从 v1 ROM 的名字串反查，
+# 不是已过期的 v1 码表 xlsx）。这些字必须在每次构建里占同一码位，否则
+# 旧存档里的主角名会按新码表解成别的字。
+PINNED_V1_CODES = {
+    "弗": 0xE2D3, "尔": 0xE274, "卡": 0xE12F, "阿": 0xE805, "巴": 0xE2A4,
+    "克": 0xE0B2, "亚": 0xE040, "达": 0xE781, "奥": 0xE225, "特": 0xE51C,
+}
+
+
+def _order_for_code(code: int) -> int:
+    i = code - NEW_CODE_BASE
+    page, rem = divmod(i, GLYPH_PAGE)
+    if rem >= GLYPH_SLOTS_PER_PAGE:
+        raise ValueError(f"pinned code {code:04X} falls on a skipped slot")
+    return page * GLYPH_SLOTS_PER_PAGE + rem
+
+
+def pin_charset_order(new_chars: list[str]) -> list[str]:
+    """把主角相关字固定到 v1 的码位，其余字按原顺序填满空隙。"""
+    pinned = {ch: _order_for_code(code) for ch, code in PINNED_V1_CODES.items()}
+    rest = [ch for ch in new_chars if ch not in pinned]
+    total = len(rest) + len(pinned)
+    need = max(pinned.values()) + 1
+    if need > total:
+        raise ValueError(f"pinned codes need {need} glyph slots, charset only has {total}")
+    out: list[str | None] = [None] * total
+    for ch, order in pinned.items():
+        if out[order] is not None:
+            raise ValueError(f"pinned order {order} collision at {ch}")
+        out[order] = ch
+    it = iter(rest)
+    for i in range(total):
+        if out[i] is None:
+            out[i] = next(it)
+    return out
 STAGE = __import__('os').environ.get('WSC_STAGE', 'all')  # story | names | all
 CAVE_AT = 0x79E000
 DISPATCH_AT = 0x79047F
@@ -193,6 +230,8 @@ REUSE = {}
 COMPOSITES = {}
 # Symbols that need a new 16x16 glyph.  '○'/'×' use original F7BC/F7BD.
 NEW_SYMBOLS = list("，！？～（）—‘“”《》&→.")
+# 全角！？已统一改为单字节 !?，但仍保留字模码位，避免后续符号码位漂移。
+KEEP_SYMBOLS = {"！", "？"}
 # original single-byte / symbol codes used by the Chinese text
 SINGLE_ALIASES = {
     "·": 0xBB,   # ・ middle dot
@@ -541,8 +580,15 @@ def build_charset(story_rows, name_rows, menu_texts=(), extra_texts=()):
     new_hanzi = [ch for ch in hanzi if ch not in REUSE]
     # Deterministic: Unicode order, independent of previous builds.
     new_hanzi = sorted(new_hanzi, key=ord)
-    new_symbols = sorted([ch for ch in NEW_SYMBOLS if freq[ch]], key=ord)
+    new_symbols = sorted([ch for ch in NEW_SYMBOLS if freq[ch] or ch in KEEP_SYMBOLS], key=ord)
     new_chars = new_hanzi + new_symbols
+    # 主角名相关字即使当前文本没用到也要保留码位，避免旧存档失效。
+    missing_pins = [ch for ch in PINNED_V1_CODES
+                    if ch not in new_chars and ch not in REUSE]
+    if missing_pins:
+        new_chars += missing_pins
+        hanzi = sorted(set(hanzi) | set(missing_pins))
+    new_chars = pin_charset_order(new_chars)
     if len(new_chars) > NEW_GLYPH_SLOTS:
         raise ValueError(
             f"hanzi={len(hanzi)} new_hanzi={len(new_hanzi)} symbols={len(new_symbols)} "
@@ -1121,6 +1167,7 @@ def apply_name_rules():
                 speakers += 1
         b["zh"] = new
     return {"name_tags": tagged, "aliases": alias_hits, "speakers": speakers}
+F1_WIDTHS = {"F5": 88, "F8": 80, "F9": 80}  # 原版 F1 条带宽度（11/10/10 格）
 def _disp_width(text: str) -> int:
     w = 0
     i = 0
@@ -1129,7 +1176,15 @@ def _disp_width(text: str) -> int:
             j = text.find("}", i)
             if j >= 0:
                 tag = text[i:j + 1]
-                w += 8 if tag == "{B:00}" else (24 if tag.startswith(("{FD:", "{FC:", "{F1:")) else 0)
+                # {FD:01}=默认名「弗尔卡」3 字 36px；其他名字宏仍按 48px（4 字）预留。
+                if tag == "{B:00}":
+                    w += 8
+                elif tag == "{FD:01}":
+                    w += 36
+                elif tag.startswith(("{FD:", "{FC:")):
+                    w += 48
+                elif tag.startswith("{F1:"):
+                    w += F1_WIDTHS.get(tag[4:-1], 80)
                 i = j + 1
                 continue
         w += 8 if ord(text[i]) < 0x80 else 12
@@ -1187,6 +1242,14 @@ def build_rom(dry_run=False):
     freq, hanzi, new_chars = build_charset(story_rows, name_rows,
                                            ui_texts, [d[2] for d in BOOK["direct"]] + pro_texts)
     encoder = Encoder(new_chars, make_font(), BOOK["special"])
+    for _ch, _want in PINNED_V1_CODES.items():
+        _got = encoder.code_map.get(_ch)
+        if _got != _want.to_bytes(2, "big"):
+            raise ValueError(
+                f"pinned code drift: {_ch} got {_got.hex() if _got else None} "
+                f"want {_want:04X}")
+    if encoder.single.get("=") != 0xC0:
+        raise ValueError("pinned code drift: '=' must stay at single-byte C0")
     if encoder.bbox_bad:
         print("WARN glyph bbox beyond 12x12 cell:", encoder.bbox_bad[:10])
     # Validate coverage before touching anything.
@@ -1415,6 +1478,7 @@ def build_rom(dry_run=False):
     stats["specials"] = apply_specials(rom, encoder)
     stats["f1names"] = apply_f1_names(rom, make_font())
     stats["prologue"] = apply_prologue(rom, encoder)
+    stats["title_graphics"] = apply_title_graphics(rom, ASSETS / "img")
     # ---- verification ----
     for bank, (ds, de, entries) in STORY_RANGES.items():
         rows = [b for b in blocks if b["bank"] == bank]
@@ -1497,6 +1561,14 @@ def build_rom(dry_run=False):
         if rom[base + di:base + di + 16] != g[:16] or \
            rom[base + di + 0x80:base + di + 0x80 + 16] != g[16:]:
             raise ValueError(f"glyph readback failed {ch} U+{ord(ch):04X} index={i}")
+    # v1 主角名/机体名/爱称的完整码串必须存在，防止只锁了单字码却改了名字文本。
+    for _label, _hex in (
+        ("主角全称", "E2D3E274E12FBBE805E274E2A4E0B2FF"),
+        ("主角爱称", "E2D3E274E12FFF"),
+        ("主角机体名", "E040E274E781E2A4E225E51CFF"),
+    ):
+        if bytes.fromhex(_hex) not in rom:
+            raise ValueError(f"pinned name string missing: {_label} ({_hex})")
     if rom[DISPATCH_AT:DISPATCH_AT + 5] != bytes.fromhex("ea00e00090"):
         raise ValueError("dispatcher patch missing")
     if rom[CAVE_AT:CAVE_AT + len(CAVE)] != CAVE:
@@ -1649,7 +1721,7 @@ def main():
     OUT_BOOK = (Path(args.codebook).expanduser().resolve() if args.codebook
                 else OUT_ROM.with_name(OUT_ROM.stem + "_码表.xlsx"))
     rom, encoder, stats, hanzi = build_rom(args.dry_run)
-    print(json.dumps(stats, ensure_ascii=False, indent=2))
+    print(json.dumps(stats, ensure_ascii=True, indent=2))
     print("hanzi distinct:", len(hanzi), "new glyphs:", len(encoder.new_chars),
           "reused:", len(REUSE))
     if not args.dry_run:
