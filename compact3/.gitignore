@@ -8,5 +8,7 @@ __pycache__/
 *.state
 *_码表.xlsx
 _*tmp*.xlsx
+assets/text.xlsx
+assets/text.build.xlsx
 assets/fonts/simsun.ttc
 ~$*

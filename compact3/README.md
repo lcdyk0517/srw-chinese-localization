@@ -57,7 +57,7 @@ Windows 下路径含空格或中文时请加引号。
 |---|---|
 | `-i, --input` | 原版日文 ROM，必填 |
 | `-o, --output` | 输出中文 ROM，必填 |
-| `--text` | 文本工作簿，默认 `assets/text.xlsx` |
+| `--text` | 文本工作簿，默认从 `assets/text/*.tsv` 重建（无 TSV 时用 `assets/text.xlsx`） |
 | `--codebook` | 码表输出，默认 `<输出名>_码表.xlsx` |
 | `--no-xlsx` | 不生成码表 |
 | `--dry-run` | 只校验数据，不写 ROM |
@@ -68,6 +68,22 @@ Windows 下路径含空格或中文时请加引号。
 python build.py -i "../original.wsc" -o "../output.wsc" \
   --text assets/text.xlsx --codebook "../output_码表.xlsx"
 ```
+
+## 文本编辑与同步
+
+git 里保存的是纯文本镜像 `assets/text/*.tsv`（每个工作表一个文件，commit diff 逐行可见）；
+`assets/text.xlsx` 已移出版本库。两者通过 `text_sync.py` 同步：
+
+```bash
+python text_sync.py export          # 在 Excel 里改完 text.xlsx 后：xlsx -> TSV，然后提交 TSV
+python text_sync.py xlsx            # 新 clone 后：TSV -> 重建 assets/text.xlsx（供 Excel 编辑 / sync_names.py）
+python text_sync.py check           # 检查本地 text.xlsx 与 TSV 是否一致
+```
+
+- 构建不需要 xlsx：`build.py` 会自动从 TSV 重建 `assets/text.build.xlsx`（已忽略）再解析。
+- 在 Excel 里改完忘记 `export` 时，构建会提示 text.xlsx 比 TSV 新。
+- 改名称表后照旧运行 `sync_names.py`（它编辑的是 `assets/text.xlsx`），完成后 `export` 再提交。
+- 不要用 Excel 直接编辑 TSV（会破坏编码/转义）；要改文本就在 xlsx 里改，或直接改 TSV。
 
 ## 网页打补丁
 
@@ -83,7 +99,9 @@ python make_patch_web.py -i "原版.wsc" -o "汉化.wsc"
 
 ```
 assets/
-  text.xlsx                  剧情 / 名称 / UI / 术语 / F1 宏等工作表
+  text/                      文本镜像 TSV（git 唯一事实源，每表一个文件 + _manifest.json）
+  text.xlsx                  文本工作簿（gitignored；由 text_sync.py 生成/导出）
+  text.build.xlsx            构建时从 TSV 重建的工作簿（gitignored，自动生成）
   verified_kanji.jsonl       日文码表核对数据
   fonts/                     正文、单字节、F1 宏使用的字体
   img/                       标题文字层/背景 PNG（-cn 优先，-jp 为原图；含单元表）
@@ -93,7 +111,8 @@ finalcard.py                 最终话标题卡：PNG → 两块 LZSS → 写回
 stagecard.py                 第二话标题卡第二行：PNG → 0x730A02 块
 make_patch_web.py            生成自带补丁的 index.html
 index.html                   网页打补丁页面
-sync_names.py                按名称表同步剧情说话人（可选工具）
+sync_names.py                按名称表同步剧情说话人（可选工具，编辑 text.xlsx）
+text_sync.py                 text.xlsx 与 assets/text/*.tsv 的双向同步
 patch_notes.md               11 行非文本字节改动的逐条说明
 LICENSE                      GPLv3.0
 requirements.txt             Python 依赖
@@ -115,7 +134,7 @@ requirements.txt             Python 依赖
 
 - 正文、序章和通关旁白、角色/机体/武器/道具名称、UI 文本、F1 宏已导入
 - 图片标题只做了最终话；常规关卡标题是叠在地图上的文字，不做图片汉化
-- 翻译和校对数据都在 `assets/text.xlsx`，构建不读 `校准` 列
+- 翻译和校对数据都在 `assets/text/`（TSV 镜像，对应 `assets/text.xlsx`），构建不读 `校准` 列
 
 ## 常见问题
 

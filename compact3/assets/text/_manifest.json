@@ -1,0 +1,298 @@
+{
+ "version": 1,
+ "sheets": [
+  {
+   "name": "说明",
+   "numeric_cols": [],
+   "merged": []
+  },
+  {
+   "name": "设定",
+   "numeric_cols": [],
+   "merged": []
+  },
+  {
+   "name": "剧情_45",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_46",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_53",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_54",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_55",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_56",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_57",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_5A",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_70",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "剧情_47",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ],
+    [
+     6,
+     "int"
+    ],
+    [
+     7,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "名称_索引",
+   "numeric_cols": [],
+   "merged": []
+  },
+  {
+   "name": "名称_机体",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "名称_角色",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "名称_爱称",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "名称_武器",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "名称_其他",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "UI文本",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ],
+    [
+     2,
+     "int"
+    ],
+    [
+     6,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "池外文本",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ],
+    [
+     2,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "指针补丁",
+   "numeric_cols": [
+    [
+     2,
+     "int"
+    ],
+    [
+     3,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "指针表",
+   "numeric_cols": [],
+   "merged": [
+    "A4:H4",
+    "A3:H3",
+    "A2:H2",
+    "A5:H5"
+   ]
+  },
+  {
+   "name": "特殊字模",
+   "numeric_cols": [
+    [
+     3,
+     "int"
+    ],
+    [
+     4,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "术语表",
+   "numeric_cols": [],
+   "merged": []
+  },
+  {
+   "name": "序章旁白",
+   "numeric_cols": [
+    [
+     1,
+     "int"
+    ],
+    [
+     2,
+     "int"
+    ],
+    [
+     3,
+     "int"
+    ],
+    [
+     4,
+     "int"
+    ],
+    [
+     10,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "F1宏",
+   "numeric_cols": [
+    [
+     5,
+     "int"
+    ],
+    [
+     14,
+     "int"
+    ]
+   ],
+   "merged": []
+  },
+  {
+   "name": "F1宏说明",
+   "numeric_cols": [],
+   "merged": []
+  }
+ ]
+}

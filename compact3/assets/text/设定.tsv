@@ -1,0 +1,15 @@
+键	值
+rom	Super Robot Taisen Compact 3 (Japan) (Rev 6).wsc
+font	font/simsun.ttc
+font_size	12
+font_origin_x	1
+font_origin_y	3
+out_rom	产物/WSC3_CN.wsc
+out_book	构建/码表.xlsx
+new_bank	114
+new_c3	242
+code_base	E000
+glyph_count	4096
+second_bank	80
+name_pool_start	30400
+name_pool_end	39146

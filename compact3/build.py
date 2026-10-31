@@ -1705,7 +1705,7 @@ def main():
     ap = argparse.ArgumentParser(description="Build a Chinese-patched WSC ROM.")
     ap.add_argument("-i", "--input", required=True, help="原版日文 ROM（.wsc）")
     ap.add_argument("-o", "--output", required=True, help="输出中文 ROM（.wsc）")
-    ap.add_argument("--text", help="文本工作簿（默认 assets/text.xlsx）")
+    ap.add_argument("--text", help="文本工作簿（默认从 assets/text/*.tsv 重建，无 TSV 时用 assets/text.xlsx）")
     ap.add_argument("--codebook", help="码表输出（默认 <输出>_码表.xlsx）")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-xlsx", action="store_true")
@@ -1714,7 +1714,16 @@ def main():
     ROM_PATH = Path(args.input).expanduser().resolve()
     if not ROM_PATH.is_file():
         ap.error(f"input ROM not found: {ROM_PATH}")
-    TEXT_XLSX = Path(args.text).expanduser().resolve() if args.text else (ASSETS / "text.xlsx")
+    if args.text:
+        TEXT_XLSX = Path(args.text).expanduser().resolve()
+    else:
+        import text_sync
+        if text_sync.MANIFEST.is_file():
+            TEXT_XLSX = text_sync.write_xlsx()  # TSV -> assets/text.build.xlsx
+            print("text workbook rebuilt from assets/text/*.tsv:", TEXT_XLSX)
+            text_sync.stale_hint()
+        else:
+            TEXT_XLSX = ASSETS / "text.xlsx"
     if not TEXT_XLSX.is_file():
         ap.error(f"text workbook not found: {TEXT_XLSX}")
     OUT_ROM = Path(args.output).expanduser().resolve()

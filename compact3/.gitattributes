@@ -1,0 +1,2 @@
+assets/text/*.tsv text eol=lf
+assets/text/_manifest.json text eol=lf
