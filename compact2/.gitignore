@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.ws
+*.wsc
+*.srm
+*.sav
+*.st
+*.state
+*_码表.xlsx
+_*tmp*.xlsx
+assets/Dai1/text.xlsx
+assets/Dai2/text.xlsx
+assets/Dai3/text.xlsx
+assets/Dai*/text.build.xlsx
+assets/Dai*/assets/fonts/simsun.ttc
+~$*

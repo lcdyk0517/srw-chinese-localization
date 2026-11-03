@@ -1,0 +1,161 @@
+index	ptr_addr	ptr_value	raw_hex	empty	jp	zh	校准	质量
+0	3EE6C4	E6C4	f245 f359 f398 f5ee 79 79 9a 9a b7	0	宇宙世紀00XX。	宇宙世纪00XX年。	无假名	无假名
+1	3EE6D2	E6D2	06 12 13 b8 f274 f3a5 f3b0 1a f59d f29d 19	0	かつて、地球圏は混乱の	曾经，地球圈正处于	ok	ok
+2	3EE6E3	E6E3	10 f010 f231 16 01 37 10 b7	0	ただ中にあった。	混乱之中。	ok	ok
+3	3EE6EE	E6EE	f283 f3f4 f23c f464 f226 f26b f3f8 b8 f048 41 6a f305 f674 f6cb 28	0	一年戦争終結後、ジオン残党狩り	一年战争结束后，以清剿吉翁	ok	ok
+4	3EE709	E709	2d f3b7 f23d 16 f3ca f3cb 2d f2b8 22 10 4f 6c 4c bd 6a f049 b7	0	を名目に暴走を始めたティターンズ。	残党为名开始暴走的提坦斯。	ok	ok
+5	3EE721	E721	f3f8 16 c7 f044 64 76 49 f23c f528 c8 14 f53a f01a 2a 10	0	後に「グリプス戦役」と呼ばれた	「即后世被称为「格利普斯」	ok	ok
+6	3EE737	E737	f23c 02 bc	0	戦い‥	战役」的战争……	ok	ok
+7	3EE73C	E73C	54 41 f048 41 6a 14 f26b f01b 12 07 b8 f293 f226 f233 16	0	ネオジオンと結びつき、最終的に	企图勾结新吉翁、最终掌控	ok	ok
+8	3EE752	E752	f274 f3a5 f3b0 0d f01d 13 2d f71a f502 0c 26 03 14 f3fc 2e f010	0	地球圏すべてを掌握しようと企んだ	整个地球圈的帕普特马斯·	ok	ok
+9	3EE76B	E76B	74 76 4f 5b 49 c0 48 67 73 46 19 f303 f335 1a b8	0	パプテマス=シロッコの野望は、	西罗克的野心，在由布莱特·	ok	ok
+10	3EE77D	E77D	f058 63 3e 50 c0 55 3d f232 02 29 3d bd f042 5b f22c 19 f2ff 16	0	ブライト=ノア率いるアーガマ隊の前に	诺亚率领的阿伽马队面前	ok	ok
+11	3EE795	E795	f4f1 04 10 b7	0	潰えた。	化为泡影。	ok	ok
+12	3EE79B	E79B	0f 19 f23c f464 19 f39c f013 23 1f 10 bc	0	その戦争の影でもまた‥	然而在那场战争的阴影下……	ok	ok
+13	3EE7AB	E7AB	f23c 02 f323 09 13 02 10 f3ab 10 11 f006 02 10 b7	0	戦い続けていた者たちがいた。	依然有人在不断战斗。	ok	ok
+14	3EE7BE	E7BE	f23c f464 19 f59d f29d 16 f432 f00c 13 f398 f20b f3d6 f3d7 2d	0	戦争の混乱に乗じて世界征服を	企图乘着战争的混乱统治	ok	ok
+15	3EE7D7	E7D7	f3fc 2e f010 f3a9 f3aa f3ab 86 ae ba 59 65 b7	0	企んだ科学者Dr,ヘル。	世界的科学家地狱博士。	ok	ok
+16	3EE7E9	E7E9	f277 f365 19 f215 f503 f006 f3be 2e f010 f6a1 f718 19	0	人類の技術が生んだ悲劇の	人类的技术所诞生的悲剧	ok	ok
+17	3EE7FF	E7FF	47 3e f05a bd f044 b8 5e f042 55 3e f050 b7	0	サイボーグ、メガノイド。	生化人，梅加诺伊德。	ok	ok
+18	3EE810	E810	f274 f3a5 19 f34b f582 f364 f5a5 2d f3b7 f432 28 b8 f274 f28f	0	地球の先任種族を名乗り、地底	自称地球的先任种族，从地底	ok	ok
+19	3EE829	E829	f2ed 08 06 27 f3f2 2a 10 f415 f25f f38c f39f b7	0	深くから現れた恐竜帝国。	深处现身的恐龙帝国。	ok	ok
+20	3EE83C	E83C	0f 0c 13 f274 f3a5 f014 0a 2b 06 b8 f245 f359 0f 19 23 19 2d	0	そして地球どころか、宇宙そのものを	以及企图将连地球、连宇宙本身	ok	ok
+21	3EE853	E853	f30e f231 16 f357 22 29 f01d 08 f203 07 f296 0c 10	0	手中に収めるべく動き出した	都收入囊中而开始行动的	ok	ok
+22	3EE867	E867	5d f045 bb f04b 65 f056 f050 49 f38c f39f bc b7	0	ムゲ・ゾルバドス帝国‥。	姆盖·佐尔巴多斯帝国……。	ok	ok
+23	3EE87A	E87A	1e f01e f3c9 f2ce f3db 16 f2e0 f323 0c 10 f23c f29d 1a bc	0	ほぼ同時期に連続した戦乱は‥	在几乎同期连续发生的战乱……	ok	ok
+24	3EE891	E891	c7 49 bd 74 bd 67 f05a 73 50 c8 14 f53a f01a 2a 29 b8	0	「スーパーロボット」と呼ばれる、	「是被称作「超级机器人」、」	ok	ok
+25	3EE8A5	E8A5	f37e f37f f314 28 f21b f28d 15 f201 2d f46e 37 10 5b 48 6a 16	0	文字通り強大な力を持ったマシンに	字面意义上拥有强大力量的机器	ok	ok
+26	3EE8BD	E8BD	26 37 13 b8 f2b0 f2b1 16 f226 2c 37 10 19 f013 01 29 b7	0	よって、勝利に終わったのである。	所终结，迎来了胜利。	ok	ok
+27	3EE8D2	E8D2	00	1			空	空
+28	3EE8D4	E8D4	bc f010 f006 b8 0f 2a f013 23 f274 f3a5 f3b0 1a f59d f29d 19	0	‥だが、それでも地球圏は混乱の	……然而，即便如此地球圈仍	ok	ok
+29	3EE8EC	E8EC	10 f010 f231 16 01 37 10 b7	0	ただ中にあった。	旧处于混乱之中。	ok	ok
+30	3EE8F7	E8F7	00	1			空	空
+31	3EE8F9	E8F9	0d f01d 13 f006 f367 f45d 16 f3df 37 10 14 f31c 2c 2a 10	0	すべてが平穏に戻ったと思われた	以为一切都恢复了平静	ok	ok
+32	3EE90F	E90F	f2e7 f34b 19 b8 f2e0 f2e5 f2c1 f27a f5a2 f239 16 26 29	0	矢先の、連邦軍上層部による	正当联邦军高层实施	ok	ok
+33	3EE925	E925	f567 1a 06 15 f2c1 f451 f3e7 f391 bc	0	浅はかな軍備縮小‥	愚蠢的军备缩减……	ok	ok
+34	3EE934	E934	0a 19 f35e f3f8 16 f42f 2a 10 f343 10 15 f39b f363 f3ab b8	0	この直後に訪れた新たな侵略者、	随后出现的新侵略者为	ok	ok
+35	3EE94B	E94B	f059 f042 f28d f3e5 f232 02 29 f059 f042 f3cc f2e0 f285 f2c1 b7	0	ベガ大王率いるベガ星連合軍。	维加大王及维加星联合军。	ok	ok
+36	3EE965	E965	f283 f28e 1a f393 07 f33a f006 37 10 3d 44 48 f049 bc	0	一度は引き下がったアクシズ‥	曾经撤退的阿克西斯……	ok	ok
+37	3EE97A	E97A	54 41 f048 41 6a 19 f344 f31f b7	0	ネオジオンの再来。	新吉翁的再临。	ok	ok
+38	3EE987	E987	0f 0c 13 f203 07 f296 0d b8 f444 19 f2e4 f370 f3ab	0	そして動き出す、謎の破壊者	随后开始活动的神秘破坏者	ok	ok
+39	3EE99B	E99B	f042 3e f04b 73 44 bc b7	0	ガイゾック‥。	盖佐克……	ok	ok
+40	3EE9A5	E9A5	f274 f3a5 2d f231 f417 14 0c 13 b8 f344 f01b f3ae 07 f3af 2a 29	0	地球を中心として、再び吹き荒れる	以地球为中心再度肆虐的	ok	ok
+41	3EE9BE	E9BE	f23c f29d 19 f2e1 b7	0	戦乱の嵐。	战乱的风暴。	ok	ok
+42	3EE9C7	E9C7	00	1			空	空
+43	3EE9C9	E9C9	bc 0f 2a f006 0a 2a 06 27 f323 08 f3bf f29f 19 1e 2e 19	0	‥それがこれから続く事件のほんの	……这不过是后续	ok	ok
+44	3EE9DE	E9DE	f71d f71b 16 0d f007 15 02 14 02 03 0a 14 2d b8	0	序章にすぎないということを、	事件的区区序章，	ok	ok
+45	3EE9F0	E9F0	0f 0c 13 0f 0a 16 f31a f245 f359 2d f476 07 f2fe 2e f013 02 08	0	そしてそこに全宇宙を巻き込んでいく	以及将全宇宙卷入	ok	ok
+46	3EEA08	EA08	c7 01 29 f201 c8 f006 f719 02 13 02 29 0a 14 2d bc	0	「ある力」が闘いていることを‥	「的「某种力量」在战斗……」	ok	ok
+47	3EEA1B	EA1B	0a 19 14 07 f4c3 23 f2e8 27 15 06 37 10 b7	0	このとき誰も知らなかった。	当时谁也不知道。	ok	ok
+48	3EEA2B	EA2B	00	1			空	空
+49	3EEA2D	EA2D	f245 f359 f398 f5ee 79 79 9a 9a b7	0	宇宙世紀00XX。	宇宙世纪00XX年。	无假名	无假名
+50	3EEA3B	EA3B	f43a f71c 1a f274 f27a bc f2e0 f2e5 f2c1 f322 f67b f36b f239 b8	0	舞台は地上‥連邦軍極東支部、	舞台在地面……联邦军	ok	ok
+51	3EEA55	EA55	f2c6 f23c f24d f22c f2f6 f274 b7	0	獣戦機隊基地。	极东支部、兽战机队基地。	无假名	无假名
+52	3EEA63	EA63	bc f320 f660 1a 0a 0a 06 27 f2b8 1f 29 b7	0	‥物語はここから始まる。	……故事从这里开始。	ok	ok
+53	3EEA73	EA73	00	1			空	空
+54	3EEA75	EA75	00	1			空	空
+55	3EEA77	EA77	00	1			空	空
+56	3EEA79	EA79	00	1			空	空
+57	3EEA7B	EA7B	00	1			空	空
+58	3EEA7D	EA7D	00	1			空	空
+59	3EEA7F	EA7F	00	1			空	空
+60	3EEA81	EA81	00	1			空	空
+61	3EEA83	EA83	00	1			空	空
+62	3EEA85	EA85	00	1			空	空
+63	3EEA87	EA87	00	1			空	空
+64	3EEA89	EA89	00	1			空	空
+65	3EEA8B	EA8B	00	1			空	空
+66	3EEA8D	EA8D	00	1			空	空
+67	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+68	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+69	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+70	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+71	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+72	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+73	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+74	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+75	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+76	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+77	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+78	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+79	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+80	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+81	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+82	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+83	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+84	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+85	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+86	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+87	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+88	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+89	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+90	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+91	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+92	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+93	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+94	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+95	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+96	3EEA8F	EA8F	f24e f203 19 f274 f27a f23c 1a f226 f4a4 2d f3b5 04 10 b7	0	激動の地上戦は終幕を迎えた。	激动的地上战迎来了终幕。	ok	ok
+97	3EEAA6	EAA6	0a 03 0c 13 f43a f71c 1a f245 f359 1d 14 f202 37 13 02 08 b7	0	こうして舞台は宇宙へと移っていく。	于是舞台向宇宙转移。	ok	ok
+98	3EEABD	EABD	00	1			空	空
+99	3EEABF	EABF	0c 06 0c b8 0f 2a 1a 01 08 1f f013	0	しかし、それはあくまで	然而，那仅仅是	ok	ok
+100	3EEACC	EACC	f283 f2ce 19 0a 14 16 0d f007 15 02 b7	0	一時のことにすぎない。	暂时的而已。	ok	ok
+101	3EEADB	EADB	00	1			空	空
+102	3EEADD	EADD	02 1f f010 f4c5 2d f325 0e 15 02 f39b f363 f3ab 10 11 b7	0	いまだ澄を見せない侵略者たち。	依然不见踪影的侵略者们。	ok	ok
+103	3EEAF3	EAF3	f23d f233 0d 27 2c 06 27 15 02 f444 19 f295 b7	0	目的すらわからない謎の敵。	连目的都不明的谜之敌。	ok	ok
+104	3EEB05	EB05	0f 0c 13 f6be f250 f3ce f314 14 15 37 10 1f 1f 19	0	そして音信不通となったままの	朗德贝尔队依然	ok	ok
+105	3EEB18	EB18	67 6a f050 bb f059 65 f22c b7	0	ロンド・ベル隊。	音信全无。	ok	ok
+106	3EEB24	EB24	00	1			空	空
+107	3EEB26	EB26	bc f30a f3c1 15 f471 f59a 2d f551 04 10 1f 1f b8	0	‥様々な問題を抱えたまま、	带着种种问题，	ok	ok
+108	3EEB39	EB39	f042 6a f050 bd 65 1a f293 f3f8 19 f201 2d f557 28 f7ba 28 b8	0	ガンドールは最後の力を振り絞り、	冈道尔竭尽全力，	ok	ok
+109	3EEB51	EB51	f24e f7bb 19 f245 f359 1d f38b 06 03 b7	0	激震の宇宙へ向かう。	驶向激震的宇宙。	ok	ok
+110	3EEB61	EB61	00	1			空	空
+111	3EEB63	EB63	bc 0f 19 f5d6 19 f70f f35c f006 b8 f31f 29 f01d 07	0	‥その龍の昇天が、来るべき	然而巨龙的升腾，	ok	ok
+112	3EEB77	EB77	f35a f23c 1d 19 f71d f430 f010 14 02 03 0a 14 2d b8	0	決戦への序曲だということを、	竟是决战的序曲，	ok	ok
+113	3EEB8B	EB8B	0a 19 14 07 f4c3 23 f2e8 27 15 06 37 10 bc	0	このとき誰も知らなかった‥	当时无人知晓……	ok	ok
+114	3EEB9B	EB9B	00	1			空	空
+115	3EEB9D	EB9D	00	1			空	空
+116	3EEB9F	EB9F	00	1			空	空
+117	3EEBA1	EBA1	00	1			空	空
+118	3EEBA3	EBA3	00	1			空	空
+119	3EEBA5	EBA5	00	1			空	空
+120	3EEBA7	EBA7	00	1			空	空
+121	3EEBA9	EBA9	00	1			空	空
+122	3EEBAB	EBAB	00 00 00 96 a4 9d aa a7 af 00 a2 ab ae	0	Thanksfor	感谢您游玩	无假名	无假名
+123	3EEBB9	EBB9	00 00 00 00 00 b5 ab b1 ae 00 ac a8 9d b5 a5 aa a3	0	yourplaying	超级机器人大战	无假名	无假名
+124	3EEBCB	EBCB	00	1			空	空
+125	3EEBCD	EBCD	00 00 95 97 92 87 94 00 94 91 84 91 96 00 99 83 94 95	0	SUPERROBOTWARS	COMPACT2	无假名	无假名
+126	3EEBE0	EBE0	00 00 00 00 00 00 85 91 8f 92 83 85 96 7b	0	COMPACT2	第1部 地球危机	无假名	无假名
+127	3EEBEF	EBEF	a1 ac a5 af ab a0 a1 7a c3 87 9d ae b0 a4 85 ae a5 af a5 af	0	episode1:EarthCrisis	到此结束	无假名	无假名
+128	3EEC04	EC04	00	1			空	空
+129	3EEC06	EC06	00	1			空	空
+130	3EEC08	EC08	00 00 00 00 00 00 96 8a 87 00 87 90 86	0	THEEND	，，，未完待续	无假名	无假名
+131	3EEC16	EC16	00	1			空	空
+132	3EEC18	EC18	00	1			空	空
+133	3EEC1A	EC1A	00	1			空	空
+134	3EEC1C	EC1C	ba ba ba b0 ab 00 9e a1 00 9f ab aa b0 a5 aa b1 a1 a0	0	,,,tobecontinued	超级机器人大战	无假名	无假名
+135	3EEC2F	EC2F	00	1			空	空
+136	3EEC31	EC31	00 00 95 97 92 87 94 00 94 91 84 91 96 00 99 83 94 95	0	SUPERROBOTWARS	COMPACT2	无假名	无假名
+137	3EEC44	EC44	00 00 00 00 00 85 91 8f 92 83 85 96 7b	0	COMPACT2	第2部 宇宙激震	无假名	无假名
+138	3EEC52	EC52	a1 ac a5 af ab a0 a1 7b c3 85 ab af a9 ab ad b1 9d a7 a1	0	episode2:Cosmoquake	敬请期待	无假名	无假名
+139	3EEC66	EC66	00	1			空	空
+140	3EEC68	EC68	00	1			空	空
+141	3EEC6A	EC6A	00	1			空	空
+142	3EEC6C	EC6C	00	1			空	空
+143	3EEC6E	EC6E	00	1			空	空
+144	3EEC70	EC70	00	1			空	空
+145	3EEC72	EC72	00	1			空	空
+146	3EEC74	EC74	00	1			空	空
+147	3EEC76	EC76	00	1			空	空
+148	3EEC78	EC78	00	1			空	空
+149	3EEC7A	EC7A	00	1			空	空
+150	3EEC7C	EC7C	00	1			空	空
+151	3EEC7E	EC7E	00	1			空	空
+152	3EEC80	EC80	00	1			空	空
+153	3EEC82	EC82	00	1			空	空
+154	3EEC84	EC84	00	1			空	空
+155	3EEC86	EC86	33 c0 8e d8 c7 06 37 01	0	ぉ=L∧「かっあ	「啊哈哈哈	ok	ok
+156	3EEC86	EC86	33 c0 8e d8 c7 06 37 01	0	ぉ=L∧「かっあ	「啊哈哈哈	ok	ok
+157	3EEC86	EC86	33 c0 8e d8 c7 06 37 01	0	ぉ=L∧「かっあ	「啊哈哈哈	ok	ok
+158	3EEC86	EC86	33 c0 8e d8 c7 06 37 01	0	ぉ=L∧「かっあ	「啊哈哈哈	ok	ok
+159	3EEC86	EC86	33 c0 8e d8 c7 06 37 01	0	ぉ=L∧「かっあ	「啊哈哈哈	ok	ok

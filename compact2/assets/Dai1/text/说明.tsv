@@ -1,0 +1,20 @@
+项目	说明
+项目	说明
+游戏	第1部 地上激动篇
+原版 ROM	Super Robot Taisen Compact 2 - Dai-1-bu - Chijou Gekidou Hen (Japan).ws
+ROM CRC32	782877BC
+构建目录	D:\\WSC3\\WS2\\构建\\Dai1
+文件结构	build.py / 文本.xlsx / 码表.xlsx / assets/（original.ws、verified_kanji.jsonl、kanji_overrides.json、fonts/）/ web/ / 产物/
+文本.xlsx	剧情_05…17（bank 内指针表+FF 串）、旁白（bank 0x3E）、名称_*、术语表、UI文本
+码表.xlsx	单字节 / F0浊音 / 汉字F2-F9 / E000-EFFF 4096 扩容表
+4096 字库	E000–EFFF 分 4 个 chunk（每块 1024 字），渲染器 cave 按 chunk 切 C2；原 F2-F9 保留
+字模标准	SimSun 12px 原点 (1,2)，墨迹 3–14 行；打包=左上8行+右上8行 / 左下+右下
+姓名表	全名用 = 分隔；名称_角色=全名，名称_爱称=短名并带对应全名
+翻译规则	人工逐句，保留原作语气与完整句；剧情每行 ≤13 个汉字、旁白每页 ≤12 个汉字；禁止机翻
+构建命令	python build.py  （默认 stage=story：4096 字库 + 已填 zh 的剧情）
+当前状态	剧情/战斗/旁白/名称已导出；中文列按批次翻译；名称导入与 UI 导入待接线
+FA/FB 8px 页	FA页 sheet 存每作页基址/跳板/cave/FB处理器地址；FAxx 仍是两字节码，但分流到 ROM 原生单字节 8×16、步进 8px 的绘制路径；原 01-DF、E0-EF、F2-F9 不动
+FB武器名	每行一个武器名：布局（逐字/S-DX）、左空、ASCII宽、ASCII间隔、ASCII后空、逐字宽、右空、条带宽、格数、FA起始格、FB号；名称池只写 FB id FF（3 字节）
+FB 体	每字节一个 FA 页格号，FF 结束；FB 处理器逐字节 AL=FA/AH=格号 调 0x5786，体只占 bank 3F 空闲区
+FA/FB 审计	日版/汉化版名称表字符串、F1 宏体均无 FA/FB 前导码；E1FA/E7FB 这类是双字节码低字节，不受影响
+构建顺序	文本/名称导入 -> F1 长名 -> FA/FB 页与宏 -> 其他指针修正；SKIP_PATCHES=FAFB 可单独跳过

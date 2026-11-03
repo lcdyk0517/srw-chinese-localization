@@ -1,0 +1,17 @@
+键	值	说明
+页bank	3B	8px字模页所在 ROM bank
+页基址	0x3B8000	页内 di 基址（相对 F000 的 16 位偏移见下）
+页内基址	0x8000	EA 分流里 add ax,imm16 的值
+跳板	0x3FE018	cmp al,F2 / jae 的 4096 字库跳板
+cave	0x3FF74F	FA/FB 分流 cave
+单字节写入入口	0x56B8	x86 近地址（CS=F000）
+字模入口	0x565E	共享 0x5786 等价入口
+共享出口	0x5A86	9 寄存器 pop + retf
+FB处理器	0x3FEC00	FB 表循环 + 逐格 lcall 字模入口
+FB表	0x3FEC48	16 项 × 2 字节
+FB体	0x3FECC0	每字节一个 FA 格号，FF 结束
+名称表基址	0x3F1F89	名称指针数组起始
+名称表项数	1771	数组项数
+FA码基	FA00	FA 页起始码
+FB号基	00	FB 宏号起始
+FA前导检查	0xFA/0xFB	审计：正文不得出现 FA/FB 前导码

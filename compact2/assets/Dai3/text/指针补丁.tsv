@@ -1,0 +1,4 @@
+地址	原字节	新字节	说明
+0x3F0000			4096 字库 cave 由 build.py 写入
+0x3FE6DE			cave：E0-EF 分 chunk 选 bank
+0x3F1C94			trampoline + C2 恢复
