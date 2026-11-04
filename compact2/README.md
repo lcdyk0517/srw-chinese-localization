@@ -8,6 +8,9 @@
 
 当前版本：V1（2026-11-03）
 
+技术细节（字库/4096 扩容、FA/FB 8px 页、文本重定位、跳过动画地址与验证）：
+[docs/technical-notes.md](docs/technical-notes.md)
+
 ## 环境
 
 - Python 3.12（主构建模块按 3.12 编译）
