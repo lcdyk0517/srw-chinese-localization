@@ -390,7 +390,7 @@ def main() -> None:
 
     html = (TEMPLATE
             .replace("__DATE__", date.today().isoformat())
-            .replace("__NOTE__", "本次更新：武器名统一 80px（零距离光束加农炮、奥克斯坦发射器 88px / 11 格）；重定位串前后各保留 1 个 FF，修复跳过版奇迹说明多余字；修复 D1/D2 反击战跳过白屏，并把 D1/D2 空跑改为直接泵脚本（约 10 帧内完成）。")
+            .replace("__NOTE__", "本次更新：武器名统一 80px（零距离光束加农炮、奥克斯坦发射器 88px / 11 格）；重定位串前后各保留 1 个 FF，修复跳过版奇迹说明多余字；修复 D1/D2 反击战跳过白屏；无援护空跑改快速泵（约 10 帧内），援护战保留逐帧原生结算，修复援护伤害丢失/敌人花屏。")
             .replace("__DATA__", json.dumps(data, ensure_ascii=False, separators=(",", ":")))
             .replace("__FONT_NAMES__", json.dumps(FONT_TAG, ensure_ascii=False))
             .replace("__OUT_NAME__", json.dumps(OUT_NAME, ensure_ascii=False)))
