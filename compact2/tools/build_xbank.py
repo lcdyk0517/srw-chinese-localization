@@ -1835,6 +1835,16 @@ QUOTE_TABLE_COUNTS = {"D1": 266, "D2": 266, "D3": 264}
 
 
 def apply_quote_ref_fix(rom, game, bdir):
+    """旧实现把台词旧偏移做全局 16 位替换，已停用。
+
+    该值会误命中 bank25/26 的事件脚本/文本字节（D1 0x254208 被改成
+    新台词偏移后，战斗结束脚本跳飞、栈溢出白屏）。需要恢复台词引用时，
+    必须先解析出真正的指针表，不能按字节全局替换。
+    """
+    return None
+
+
+def _apply_quote_ref_fix_legacy(rom, game, bdir):
     """布莱特「高能米加粒子炮」这类台词被脚本/表用旧 bank39 偏移引用。
 
     攻击台词表之外还有多套旧引用（如 D2 bank07 的指针表、D3 bank3A 脚本），
