@@ -1835,20 +1835,11 @@ QUOTE_TABLE_COUNTS = {"D1": 266, "D2": 266, "D3": 264}
 
 
 def apply_quote_ref_fix(rom, game, bdir):
-    """旧实现把台词旧偏移做全局 16 位替换，已停用。
-
-    该值会误命中 bank25/26 的事件脚本/文本字节（D1 0x254208 被改成
-    新台词偏移后，战斗结束脚本跳飞、栈溢出白屏）。需要恢复台词引用时，
-    必须先解析出真正的指针表，不能按字节全局替换。
-    """
-    return None
-
-
-def _apply_quote_ref_fix_legacy(rom, game, bdir):
     """布莱特「高能米加粒子炮」这类台词被脚本/表用旧 bank39 偏移引用。
 
-    攻击台词表之外还有多套旧引用（如 D2 bank07 的指针表、D3 bank3A 脚本），
-    这里把该句旧偏移的所有 16 位引用统一改到新译文，避免仍显示日文。
+    只改真正的指针表项：命中值前后 ±2/±4 字节也必须是接近 old 的偏移
+    （同一张表里的相邻项）。事件脚本里的 45 E6 CF 69 4D 这类字节流前后
+    是操作码，不满足该特征，不能改。
     """
     if game not in QUOTE_REF_FIX:
         return None
@@ -1873,7 +1864,22 @@ def _apply_quote_ref_fix_legacy(rom, game, bdir):
             break
         # bank35 是名称池/F1 串，bank3F 含名称指针表；16 位值相同纯属巧合，
         # 全局替换会把别的名字指针改成台词偏移（GP02A 曾因此丢失名称）。
-        if not (0x390000 <= i < 0x3A0000) and not (0x350000 <= i < 0x360000)                 and not (0x3F0000 <= i < 0x400000):
+        if (0x390000 <= i < 0x3A0000) or (0x350000 <= i < 0x360000) \
+                or (0x3F0000 <= i < 0x400000):
+            s = i + 1
+            continue
+        # 指针表特征：连续 5 个 16 位项必须单调不减，且相邻项落在同一
+        # 偏移区间、与 old 接近。脚本流（E645/4Dxx）和重复图案（5B5B）
+        # 都不满足，直接跳过。
+        words = []
+        for delta in (-4, -2, 0, 2, 4):
+            j = i + delta
+            words.append(int.from_bytes(rom[j:j + 2], "little")
+                         if 0 <= j and j + 2 <= len(rom) else -1)
+        ordered = all(words[k] <= words[k + 1] for k in range(4))
+        near = sum(1 for k, v in enumerate(words)
+                   if k != 2 and 0x4000 <= v < 0x10000 and abs(v - old) <= 0x200)
+        if ordered and near >= 2:
             rom[i:i + 2] = new.to_bytes(2, "little")
             hit += 1
         s = i + 1
