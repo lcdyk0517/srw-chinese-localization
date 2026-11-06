@@ -87,13 +87,20 @@ python text_sync.py check           # 检查本地 text.xlsx 与 TSV 是否一�
 
 ## 网页打补丁
 
-`index.html` 是自带补丁数据的单文件页面，可直接双击打开，也可以放到 GitHub Pages。拖入原版 ROM，校验通过后页面会显示 **补丁信息（V1、破解/初翻、校准、测试、杂活）** 和原版→输出 CRC；确认后点击应用，即可下载汉化 ROM。所有处理都在浏览器本地完成，不上传 ROM。
+`index.html` 是自带补丁数据的单文件页面，可直接双击打开，也可以放到 GitHub Pages。拖入原版 ROM，校验通过后页面会显示 **补丁信息（破解/初翻、校准、测试、杂活）** 和原版→输出 CRC；确认后点击应用，即可下载汉化 ROM。所有处理都在浏览器本地完成，不上传 ROM。
+
+页面有两组选项：
+
+- **字体**：宋体（推荐）/ 融合像素；
+- **版本**：汉化 V2（原版流程）/ **+ 难度选择**（新游戏开始前先选普通/简单；简单模式包含 IPS 的初始 SP、精神消耗 1/5、修理费/资金对调、机体改造费 1/10、武器改造费降低等调整，不改变读档与改名流程）。
 
 需要支持 `DecompressionStream` 的新版 Chrome / Edge / Firefox。补丁只适用于页面显示的原版 CRC；换 ROM 或重新构建后，用同一条命令重新生成页面：
 
 ```bash
-python make_patch_web.py -i "原版.wsc" -o "汉化.wsc"
+python make_patch_web.py -i "原版.wsc"   -o "宋体V2.wsc" --fusion "融合V2.wsc"   --difficulty "宋体V2+难度选择.wsc" --difficulty-fusion "融合V2+难度选择.wsc"
 ```
+
+下载文件名：`超级机器人大战compact3[cn][lcdyk][v2].wsc`、`...[v2][fusion].wsc`、`...[v2][难度选择].wsc`、`...[v2][fusion][难度选择].wsc`。
 
 ## 目录
 

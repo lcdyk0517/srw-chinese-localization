@@ -126,6 +126,7 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
       <div class="pir"><span>干杂活</span><b>lcdyk</b></div>
       <div class="pir"><span>V2 修复</span><b>分支选项、梵·法内尔爱称、妮→尼；演示改动画；字体偏小</b></div>
       <div class="pir"><span>字体版本</span><b><span id="fname">宋体</span></b></div>
+      <div class="pir"><span>难度选择</span><b><span id="verName">未添加</span></b></div>
       <div class="pir"><span>CRC32</span><b><span id="pcrc">-</span> → <span id="ocrc">-</span></b></div>
     </div>
 
@@ -133,6 +134,12 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
       <span class="fsl">字体</span>
       <label><input type="radio" name="font" value="simsun" checked><b>宋体</b><i>笔画扎实（推荐）</i></label>
       <label><input type="radio" name="font" value="fusion"><b>融合像素</b><i>点阵风格</i></label>
+    </div>
+
+    <div class="fontsel" id="vsel">
+      <span class="fsl">版本</span>
+      <label><input type="radio" name="ver" value="base" checked><b>汉化 V2</b><i>原版流程</i></label>
+      <label><input type="radio" name="ver" value="diff"><b>+ 难度选择</b><i>新游戏先选普通 / 简单</i></label>
     </div>
 
     <div class="bar"><i id="pb"></i></div>
@@ -146,16 +153,19 @@ button#ap:disabled{opacity:.45;cursor:not-allowed}
 </div>
 
 <script>
-const PATCH_DATA={simsun:"__PATCH_SIMSUN_B64__",fusion:"__PATCH_FUSION_B64__"};
+const PATCH_DATA={simsun:"__PATCH_SIMSUN_B64__",fusion:"__PATCH_FUSION_B64__",simsun_d:"__PATCH_SIMSUN_D_B64__",fusion_d:"__PATCH_FUSION_D_B64__"};
 const FONT_NAME={simsun:"宋体",fusion:"融合像素"};
-const OUT_NAMES={simsun:"超级机器人大战compact3[cn][lcdyk][v2].wsc",fusion:"超级机器人大战compact3[cn][lcdyk][v2][fusion].wsc"};
+const OUT_NAMES={simsun:"超级机器人大战compact3[cn][lcdyk][v2].wsc",fusion:"超级机器人大战compact3[cn][lcdyk][v2][fusion].wsc",
+  simsun_d:"超级机器人大战compact3[cn][lcdyk][v2][难度选择].wsc",fusion_d:"超级机器人大战compact3[cn][lcdyk][v2][fusion][难度选择].wsc"};
+const VER_NAME={base:"未添加",diff:"已添加"};
 const $=id=>document.getElementById(id);
 const CT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}return t})();
 function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=(CT[(c^u8[i])&255]^(c>>>8))>>>0;return (c^0xFFFFFFFF)>>>0}
 function hex8(n){return n.toString(16).toUpperCase().padStart(8,"0")}
 function log(msg,cls){const d=document.createElement("div");if(cls)d.className=cls;d.textContent=msg;$("lg").appendChild(d);$("lg").scrollTop=$("lg").scrollHeight}
 function stage(p,msg){$("pb").style.width=p+"%";if(msg)$("vd").textContent=msg}
-let SRC=null,OUT=null,META=null,PATCHES={},SEL="simsun";
+let SRC=null,OUT=null,META=null,PATCHES={},SEL="simsun",VER="base";
+function patchKey(){const k=SEL+(VER==="diff"&&PATCHES[SEL+"_d"]?"_d":"");return PATCHES[k]?k:SEL;}
 function parsePatch(b64){
   const bin=atob(b64),by=new Uint8Array(bin.length);
   for(let i=0;i<bin.length;i++)by[i]=bin.charCodeAt(i);
@@ -164,14 +174,18 @@ function parsePatch(b64){
   return {srcCrc:dv.getUint32(4,true),outCrc:dv.getUint32(8,true),size:dv.getUint32(12,true),comp:by.slice(20,20+dv.getUint32(16,true))};
 }
 for(const k in PATCH_DATA){if(!PATCH_DATA[k])continue;try{PATCHES[k]=parsePatch(PATCH_DATA[k])}catch(e){}}
-function selectFont(k){
-  if(!PATCHES[k])k="simsun";
-  SEL=k;META=PATCHES[k];OUT=null;$("dl").style.display="none";
-  $("fname").textContent=FONT_NAME[k]||k;
+function selectPatch(){
+  const k=patchKey();
+  if(!PATCHES[k]){if(VER==="diff"){VER="base";document.querySelector('input[name=ver][value=base]').checked=true;} }
+  const key=patchKey();
+  if(PATCHES[key])META=PATCHES[key];else META=PATCHES.simsun;
+  OUT=null;$("dl").style.display="none";
+  $("fname").textContent=FONT_NAME[SEL]||SEL;
+  $("verName").textContent=VER_NAME[VER]||VER;
   if(META){$("vexp").textContent=hex8(META.srcCrc);$("pcrc").textContent=hex8(META.srcCrc);$("ocrc").textContent=hex8(META.outCrc)}
   if(SRC&&META){const c=crc32(SRC);$("ap").disabled=!(c===META.srcCrc&&SRC.length===META.size)}
 }
-if(PATCHES.simsun){selectFont("simsun");$("fs").style.display=Object.keys(PATCHES).length>1?"block":"none";}
+if(PATCHES.simsun){selectPatch();$("fs").style.display=Object.keys(PATCHES).length>1?"block":"none";$("vsel").style.display=(PATCHES.simsun_d||PATCHES.fusion_d)?"block":"none";}
 else{$("vexp").textContent="补丁解析失败";$("vexp").className="v er"}
 async function inflate(d){
   if(typeof DecompressionStream==="undefined")throw new Error("浏览器不支持 DecompressionStream（请用新版 Chrome/Edge/Firefox）");
@@ -217,15 +231,19 @@ $("ap").addEventListener("click",async()=>{
   }catch(e){stage(0,"失败");log("失败："+e.message,"er");$("ap").disabled=false}
 });
 document.querySelectorAll("input[name=font]").forEach(el=>el.addEventListener("change",e=>{
-  selectFont(e.target.value);
+  SEL=e.target.value;selectPatch();
   if(SRC)log("已切换字体："+(FONT_NAME[SEL]||SEL),"ii");
+}));
+document.querySelectorAll("input[name=ver]").forEach(el=>el.addEventListener("change",e=>{
+  VER=e.target.value;selectPatch();
+  if(SRC)log("难度选择："+VER_NAME[VER],"ii");
 }));
 $("agree").addEventListener("change",e=>{$("enter").disabled=!e.target.checked});
 $("enter").addEventListener("click",()=>{$("notice").classList.add("hide")});
 $("dl").addEventListener("click",()=>{
   if(!OUT)return;
   const a=document.createElement("a");a.href=URL.createObjectURL(OUT);
-  a.download=OUT_NAMES[SEL]||OUT_NAMES.simsun;
+  a.download=OUT_NAMES[patchKey()]||OUT_NAMES.simsun;
   a.click();URL.revokeObjectURL(a.href);log("已开始下载","ok");
 });
 </script>
@@ -250,6 +268,8 @@ def main():
     ap.add_argument("-i", "--input", required=True, help="原版日文 ROM")
     ap.add_argument("-o", "--patched", required=True, help="宋体汉化 ROM（默认字体）")
     ap.add_argument("--fusion", help="融合像素汉化 ROM（提供后页面出现字体选择）")
+    ap.add_argument("--difficulty", help="宋体 + 难度选择 ROM（提供后页面出现版本选择）")
+    ap.add_argument("--difficulty-fusion", help="融合像素 + 难度选择 ROM")
     ap.add_argument("--out", help="输出 HTML（默认 index.html）")
     args = ap.parse_args()
     src = Path(args.input).read_bytes()
@@ -258,14 +278,26 @@ def main():
     b64_f, crc_f, len_f = "", 0, 0
     if args.fusion:
         b64_f, crc_f, len_f = pack(src, Path(args.fusion).read_bytes(), src_crc)
+    b64_d, crc_d, len_d = "", 0, 0
+    if args.difficulty:
+        b64_d, crc_d, len_d = pack(src, Path(args.difficulty).read_bytes(), src_crc)
+    b64_df, crc_df, len_df = "", 0, 0
+    if args.difficulty_fusion:
+        b64_df, crc_df, len_df = pack(src, Path(args.difficulty_fusion).read_bytes(), src_crc)
     out = Path(args.out) if args.out else Path(__file__).with_name("index.html")
     html = (TEMPLATE.replace("__PATCH_SIMSUN_B64__", b64_s)
-                    .replace("__PATCH_FUSION_B64__", b64_f))
+                    .replace("__PATCH_FUSION_B64__", b64_f)
+                    .replace("__PATCH_SIMSUN_D_B64__", b64_d)
+                    .replace("__PATCH_FUSION_D_B64__", b64_df))
     out.write_text(html, encoding="utf-8")
     print(f"source CRC32: {src_crc:08X}")
     print(f"simsun output CRC32: {crc_s:08X}  patch {len_s} B")
     if b64_f:
         print(f"fusion output CRC32: {crc_f:08X}  patch {len_f} B")
+    if b64_d:
+        print(f"difficulty output CRC32: {crc_d:08X}  patch {len_d} B")
+    if b64_df:
+        print(f"difficulty+fusion output CRC32: {crc_df:08X}  patch {len_df} B")
     print(f"written: {out}  ({len(html)} chars)")
 
 
